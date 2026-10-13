@@ -1,0 +1,8 @@
+#gitの記録対象から外すもの
+.venv/
+__pycache__/
+.vscode/
+.env
+*.db
+*.sqlite
+*.sqlite3
