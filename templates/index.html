@@ -5,23 +5,27 @@
     <title>学習記録アプリ</title>
 </head>
 <body>
+    <h1>学習記録</h1>
     <aside>
         <h2>問題一覧</h2>
         <ul>
-            <li>問題A</li>
-            <li>問題B</li>
+            {% for prob in problems %}
+            <li>{{ prob["title"] }}</li>
+            <form action="/delete" method="post">
+                <input type="hidden" name="problem_id" value="{{ prob['id'] }}">
+                <button type="submit">削除する</button>
+            </form>
+            {% endfor %}
         </ul>
     </aside>
 
     <main>
         <header>
-            <h1>問題A</h1>
-            <p>タグ：累積和、配列</p>
             <a href="/new">＋ 新しい問題を記録</a>
         </header>
 
         <section>
-            <h2>挑戦・復習の記録</h2>
+            <h2>復習の記録</h2>
             <p>解答状況：解説を見て解けた</p>
             <p>メモ：累積和を使うことに気づかなかった。</p>
             <button>復習の記録を追加</button>
