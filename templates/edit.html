@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <title>問題を編集</title>
+    </head>
+    
+    <body>
+        <h1>問題を編集する</h1>
+        
+        <form method="post">
+            <div>
+                <input type="text" name="new_title" value="{{ html_edi_prob['title'] }}" required>
+            </div>
+            <div>
+                <input type="text" name="new_url" value="{{ html_edi_prob['url']}}" required>
+            </div>
+            <div>
+                <textarea name="new_memo">{{ html_edi_prob['memo'] }}</textarea>
+                <button type="submit">変更する</button>
+            </div>
+        </form>
+ 
+        
+
+
+    </body>
+
+</html>

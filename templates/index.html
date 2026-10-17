@@ -9,27 +9,23 @@
     <aside>
         <h2>問題一覧</h2>
         <ul>
-            {% for prob in problems %}
-            <li>{{ prob["title"] }}</li>
+            {% for prob in html_problems %}
+            <li>{{ prob["title"] }}
             <form action="/delete" method="post">
-                <input type="hidden" name="problem_id" value="{{ prob['id'] }}">
+                <input type="hidden" name="del_problem_id" value="{{ prob['id'] }}">
                 <button type="submit">削除する</button>
             </form>
+            <a href="/edit?problem_id={{ prob['id'] }}">！問題を編集する</a> <!-- urlにidの情報をつけて/editに飛-->
+            </li>
             {% endfor %}
         </ul>
     </aside>
 
     <main>
+            
         <header>
             <a href="/new">＋ 新しい問題を記録</a>
         </header>
-
-        <section>
-            <h2>復習の記録</h2>
-            <p>解答状況：解説を見て解けた</p>
-            <p>メモ：累積和を使うことに気づかなかった。</p>
-            <button>復習の記録を追加</button>
-        </section>
     </main>
 </body>
 </html>
