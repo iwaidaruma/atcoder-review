@@ -10,19 +10,33 @@
         <h2>問題一覧</h2>
         <ul>
             {% for prob in html_problems %}
-            <li>{{ prob["title"] }}
-            <form action="/delete" method="post">
+            <li><a href="/?problem_id={{ prob['id'] }}">{{ prob["title"] }}</a>
+            
+                <form action="/delete" method="post">
                 <input type="hidden" name="del_problem_id" value="{{ prob['id'] }}">
                 <button type="submit">削除する</button>
-            </form>
-            <a href="/edit?problem_id={{ prob['id'] }}">！問題を編集する</a> <!-- urlにidの情報をつけて/editに飛-->
+                </form>
+                <form action="/edit" method="get">
+                    <input type="hidden" name="problem_id" value="{{ prob['id'] }}">
+                    <button type="submit">問題を編集する</button>
+                </form>
+            
             </li>
             {% endfor %}
         </ul>
     </aside>
 
     <main>
-            
+        {% if html_selected_problem is not none %}
+        <div>
+            <a href="{{html_selected_problem['url']}}">{{ html_selected_problem['title'] }}</a>
+            <li>{{ html_selected_problem['memo'] }}</li>
+        </div>
+        {% else %}
+            <p>一覧から問題を選んでください</p>
+        {% endif %}    
+        
+        <br>
         <header>
             <a href="/new">＋ 新しい問題を記録</a>
         </header>

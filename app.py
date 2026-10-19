@@ -7,7 +7,8 @@ app = Flask(__name__)
 
 @app.route("/") #webアプリのトップURLにリクエストが来たらindex()
 def index():
-    
+    selected_id = request.args.get("problem_id",type=int)
+
     pyt_problems = []
     con = sqlite3.connect(DATABASE)
     db_problem = con.execute("SELECT rowid,title,url,memo FROM problem").fetchall() #pythonのリストオブジェクト
@@ -15,7 +16,14 @@ def index():
     for row in db_problem:
         pyt_problems.append({"id":row[0],"title":row[1],"url":row[2],"memo":row[3]})
 
-    return render_template("index.html",html_problems=pyt_problems) #html側で使う変数にpyt_problemを代入
+    selected_problem = None #最初に開くときに渡すものがないとエラーになるためNoneにしておく
+
+    for prob in pyt_problems:
+        if prob["id"] == selected_id:
+            selected_problem = prob
+            break
+    
+    return render_template("index.html",html_problems=pyt_problems,html_selected_problem=selected_problem) #html側で使う変数にpyt_problemを代入
 
 @app.route("/new",methods=["GET","POST"]) #GET or POSTの要求が来たらnew()を呼ぶ
 def new():
